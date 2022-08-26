@@ -1,0 +1,140 @@
+﻿<div class="row">       
+	<h2>Загрузка файлов</h2>
+   
+	<div class=" form-group  text-center offset-3">
+		<div class="custom-file">
+			<input type="file" id="fileUpload" class="fileUpload">
+			<button id="btnUpload" class="btn  btn-success">Загрузить</button>
+		</div>
+	</div>
+</div> 
+
+<script src="/lib/jquery/dist/jquery.min.js"></script>
+ <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+ <script src="/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0"></script>
+
+<script>
+
+	$("#fileUpload").on('change', function () {
+	var files = $('#fileUpload').prop("files");                
+	var url = "/Index?handler=MyUploader";
+	formData = new FormData();
+	formData.append("MyUploader", files[0]);
+
+	jQuery.ajax({
+		type: 'POST',
+		url: url,
+		data: formData,
+		cache: false,
+		contentType: false,
+		processData: false,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("XSRF-TOKEN",
+				$('input:hidden[name="__RequestVerificationToken"]').val());
+		},
+		success: function (repo) {
+			if (repo.status == "success") {
+				alert("File : " + repo.filename + " is uploaded successfully");
+			}
+		},
+		error: function() {
+			alert("Error occurs");
+		}
+	});
+}); 
+
+// If you want to upload file on button click, then use below button click event
+$("#btnUpload").on('click',function(){
+   // add jQuery ajax code to upload
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@using testNdoc.Models
+    @model IEnumerable<Section>
+    @{
+        ViewData["Title"] = "Home Page";
+    }
+    <h2>Нормативно - правовые документы</h2>
+    <p><a asp-action="Create">Добавить компонент</a></p>
+    <table class="table">
+        <tr><th>Главная</th><th>Поисковая страница</th></tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+            </tr>
+        }
+    </table>*@
+
+@*@model Document
+<form asp-action="Index" asp-controller="Admin" method="post">
+
+     <div class="row">       
+	<h2>Upload file using jQuery ajax in Asp.net Core Razor Pages</h2>
+   
+	<div class=" form-group  text-center offset-3">
+		<div class="custom-file">
+			<input type="file" id="fileUpload" class="fileUpload">
+			<button id="btnUpload" class="btn btn-success">Upload</button>
+		</div>
+	</div>
+</div>
+</form>
+
+<script>
+    $("#fileUpload").on('change', function () {
+	var files = $('#fileUpload').prop("files");                
+	var url = "/Index?handler=MyUploader";
+	formData = new FormData();
+	formData.append("MyUploader", files[0]);
+
+	jQuery.ajax({
+		type: 'POST',
+		url: url,
+		data: formData,
+		cache: false,
+		contentType: false,
+		processData: false,
+		beforeSend: function (xhr) {
+			xhr.setRequestHeader("XSRF-TOKEN",
+				$('input:hidden[name="__RequestVerificationToken"]').val());
+		},
+		success: function (repo) {
+			if (repo.status == "success") {
+				alert("File : " + repo.filename + " is uploaded successfully");
+			}
+		},
+		error: function() {
+			alert("Error occurs");
+		}
+	});
+}); 
+
+// If you want to upload file on button click, then use below button click event
+$("#btnUpload").on('click',function(){
+   // add jQuery ajax code to upload
+});
+</script>*@
+
+
+
